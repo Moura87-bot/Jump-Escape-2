@@ -22,19 +22,30 @@ class Menu:
 
 
 			self.menu_text(
-				text_size=60,
+				text_size=40,
 				text="JUMP ESCAPE",
 				text_color= COLOR_GREEN,
 				text_center_pos=(WIN_WIDTH // 2, 100)
 
 			)
-			self.menu_text_shadow(
-				30,
-				"MENU_OPTIONS ",
-				(255, 128, 0),
-				(0, 0, 0),
-				(WIN_WIDTH // 2, 160)
-			)
+			opcoes = [
+				"NEW GAME 1P - COOPERATIVE",
+				"NEW GAME P - COOPERATIVE",
+				"SCORE",
+				"EXIT"
+			]
+
+			y = 160
+
+			for opcao in opcoes:
+				self.menu_text_shadow(
+					20,
+					opcao,
+					(255, 128, 0),
+					(0, 0, 0),
+					(WIN_WIDTH // 2, y)
+				)
+				y += 40  # espaço entre linhas
 
 
 			pygame.display.flip()
