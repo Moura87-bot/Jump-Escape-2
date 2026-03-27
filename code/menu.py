@@ -25,7 +25,7 @@ class Menu:
 				text_size=40,
 				text="JUMP ESCAPE",
 				text_color= COLOR_GREEN,
-				text_center_pos=(WIN_WIDTH // 2, 100)
+				text_center_pos=(WIN_WIDTH // 2, 60)
 
 			)
 			opcoes = [
@@ -35,7 +35,7 @@ class Menu:
 				"EXIT"
 			]
 
-			y = 160
+			y = 100
 
 			for opcao in opcoes:
 				self.menu_text_shadow(
