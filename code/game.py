@@ -1,31 +1,30 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from turtledemo.clock import jump
+
+# -*- coding: utf-8 -*-
 
 import pygame
-from pygame import Surface, Rect
-from pygame.font import Font
-
-from code.const import WIN_WIDTH, WIN_HEIGHT
+from code.const import WIN_WIDTH, WIN_HEIGHT, MENU_OPTIONS
 from code.menu import Menu
+from code.Level import Level  # ✔ import correto da classe
 
 
 class Game:
     def __init__(self):
         pygame.init()
-        self.window = pygame.display.set_mode(size=(WIN_WIDTH, WIN_HEIGHT))
+        self.window = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
 
     def run(self):
-
         while True:
             menu = Menu(self.window)
-            menu.run()
+            menu_return = menu.run()
 
-            pass
-            # check for all events
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:  # Close Window
-                    pygame.quit()  # end pygame
-                    quit()
+            # ▶ iniciar jogo
+            if menu_return in [MENU_OPTIONS[0], MENU_OPTIONS[1], MENU_OPTIONS[2]]:
+                level = Level(self.window, "level1", menu_return)
+                level.run()
 
-
+            # ❌ sair do jogo
+            elif menu_return == MENU_OPTIONS[3]:
+                pygame.quit()
+                quit()
