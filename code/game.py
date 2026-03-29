@@ -12,6 +12,7 @@ from code.Level import Level  # ✔ import correto da classe
 class Game:
     def __init__(self):
         pygame.init()
+        pygame.mixer.init()
         self.window = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
 
     def run(self):

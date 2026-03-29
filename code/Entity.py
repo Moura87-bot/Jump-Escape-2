@@ -3,6 +3,7 @@
 from abc import abstractmethod
 import pygame
 
+
 class Entity:
     def __init__(self, name: str, position: tuple):
         self.name = name
