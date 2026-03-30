@@ -3,7 +3,8 @@
 import pygame
 from pygame import Surface, Rect
 from pygame.font import Font
-from code.const import WIN_WIDTH, COLOR_GREEN, MENU_OPTIONS
+from code.const import WIN_WIDTH, WIN_HEIGHT, COLOR_GREEN, MENU_OPTIONS
+
 
 class Menu:
     def __init__(self, window):
@@ -20,8 +21,10 @@ class Menu:
             self.window.fill((0, 0, 0))
             self.window.blit(self.surf, self.rect)
 
+            # TÍTULO
             self.menu_text(40, "JUMP ESCAPE", COLOR_GREEN, (WIN_WIDTH // 2, 60))
 
+            # OPÇÕES
             y = 120
             for i, opcao in enumerate(MENU_OPTIONS):
                 if i == menu_option:
@@ -31,11 +34,21 @@ class Menu:
                     cor = (0, 255, 0)
                     tamanho = 20
 
-                self.menu_text_shadow(tamanho, opcao, cor, (255, 128, 0), (WIN_WIDTH // 2, y))
+                self.menu_text_shadow(
+                    tamanho,
+                    opcao,
+                    cor,
+                    (255, 128, 0),
+                    (WIN_WIDTH // 2, y)
+                )
                 y += 40
+
+            # 🔥 CONTROLES (NOVO)
+            self.draw_controls()
 
             pygame.display.flip()
 
+            # EVENTOS
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -51,12 +64,14 @@ class Menu:
                     if event.key == pygame.K_RETURN:
                         return MENU_OPTIONS[menu_option]
 
+    # TEXTO NORMAL
     def menu_text(self, size, text, color, pos):
         font: Font = pygame.font.SysFont("Lucida Sans Typewriter", size)
         surf: Surface = font.render(text, True, color)
         rect: Rect = surf.get_rect(center=pos)
         self.window.blit(surf, rect)
 
+    # TEXTO COM SOMBRA
     def menu_text_shadow(self, size, text, color, shadow_color, pos):
         font = pygame.font.SysFont("Lucida Sans Typewriter", size)
 
@@ -68,3 +83,24 @@ class Menu:
 
         self.window.blit(shadow, shadow_rect)
         self.window.blit(text_surf, text_rect)
+
+    # 🔥 NOVA FUNÇÃO: CONTROLES
+    def draw_controls(self):
+        controls = [
+            "CONTROLES:",
+            "↑ ↓ ← →  - Mover",
+            "SPACE     - Atirar",
+            "ENTER     - Selecionar",
+            "ESC       - Sair"
+        ]
+
+        y = WIN_HEIGHT - 180  # posição inferior da tela
+
+        for linha in controls:
+            self.menu_text(
+                16,
+                linha,
+                (0, 255, 0),
+                (WIN_WIDTH // 6, y)
+            )
+            y += 10

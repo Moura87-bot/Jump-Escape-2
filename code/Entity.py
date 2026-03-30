@@ -1,16 +1,17 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from abc import abstractmethod
 import pygame
 
+from code.const import ENTITY_HEALTH
 
 class Entity:
-    def __init__(self, name: str, position: tuple):
+    def __init__(self, name, position):
         self.name = name
-        self.surf = pygame.image.load(f'./asset/{name}.png').convert_alpha()
-        self.rect = self.surf.get_rect(left=position[0], top=position[1])
-        self.speed = 0
 
-    @abstractmethod
-    def move(self):
-        pass
+        self.surf = pygame.image.load(f'./asset/{name}.png').convert_alpha()
+        self.rect = self.surf.get_rect(topleft=position)
+
+        # ✔ correto
+        self.health = ENTITY_HEALTH.get(self.name, 0)
+
+        self.speed = 0

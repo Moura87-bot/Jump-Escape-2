@@ -1,18 +1,13 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-
-import pygame
 from code.Entity import Entity
+from code.const import ENTITY_SPEED
+
 
 class Enemy(Entity):
     def __init__(self, name, position):
         super().__init__(name, position)
-        self.speed = 3
+        self.speed = ENTITY_SPEED.get(name, 3)
 
     def move(self):
-        # inimigo anda para esquerda
         self.rect.x -= self.speed
-
-        # se sair da tela, volta para direita
-        if self.rect.right < 0:
-            self.rect.left = 800  # largura da tela (ajuste se quiser)
