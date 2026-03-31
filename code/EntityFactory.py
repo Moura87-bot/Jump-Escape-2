@@ -1,13 +1,12 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -im
+# -*- coding: utf-8 -*-
+
 import random
-
-
 
 from code.Background import Background
 from code.Enemy import Enemy
 from code.Player import Player
-from code.Player1Bullet import Bullet
+from code.Player1Bullet import Player1Bullet
 from code.const import WIN_WIDTH, WIN_HEIGHT
 
 
@@ -43,8 +42,17 @@ class EntityFactory:
                     (WIN_WIDTH + 10, random.randint(0, WIN_HEIGHT))
                 )
 
-            case 'bullet':  # 👈 novo case
-                return Bullet('Bullet', position)
+            case 'player1bullet':
+                print("CRIANDO BALA PLAYER1")
+                return Player1Bullet('Player1Bullet', position)
+
+            case 'player2bullet':
+                from code.Player2Bullet import Player2Bullet
+                return Player2Bullet('Player2Bullet', position)
+
+            case 'enemy1bullet':
+                from code.Enemy1Bullet import Enemy1Bullet
+                return Enemy1Bullet('Enemy1Bullet', position)
 
             case _:
                 print(f"ERRO: entidade '{entity_name}' não existe!")

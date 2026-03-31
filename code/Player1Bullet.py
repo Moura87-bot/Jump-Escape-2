@@ -1,19 +1,15 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-
-import pygame
 from code.Entity import Entity
-from code.const import WIN_WIDTH
+from code.const import WIN_WIDTH, ENTITY_SPEED
 
 
-class Bullet(Entity):
-    def __init__(self, name, position, speed=8):
+class Player1Bullet(Entity):
+    def __init__(self, name, position):
         super().__init__(name, position)
-        self.speed = speed
+        self.speed = ENTITY_SPEED.get(name, 8)
+        print("TAMANHO DA BALA:", self.rect.width, self.rect.height)
 
     def move(self):
-        self.rect.x += self.speed
+        self.rect.centerx += self.speed  # ✔️ correto
 
-        # remove quando sair da tela
         if self.rect.left > WIN_WIDTH:
             self.health = 0
